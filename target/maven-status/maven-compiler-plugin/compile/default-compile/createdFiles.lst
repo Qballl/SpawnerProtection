@@ -8,6 +8,6 @@ me/qball/spawnerprotection/Listeners/SpawnerManagementGUIClick.class
 me/qball/spawnerprotection/Listeners/SpawnerBreak.class
 me/qball/spawnerprotection/Listeners/ShopClick.class
 me/qball/spawnerprotection/Listeners/SpawnerClick.class
-me/qball/spawnerprotection/Listeners/SpawnerExplode.class
 me/qball/spawnerprotection/SpawnerProtection.class
+me/qball/spawnerprotection/Listeners/SpawnerExplode.class
 me/qball/spawnerprotection/Utils/Gui.class

@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-
+import org.bukkit.entity.EntityType;
 
 public class SpawnerPlace implements Listener {
     private SpawnerProtection spawnerProtection;
@@ -22,7 +22,7 @@ public class SpawnerPlace implements Listener {
                 String entity = e.getItemInHand().getItemMeta().getLore().get(0).toUpperCase();
                 SpawnerFile spawnerFile = new SpawnerFile(spawnerProtection);
                 spawnerFile.saveSpawner(e.getPlayer().getUniqueId(), e.getBlock().getLocation());
-                spawner.setSpawnedType(SpawnerTypes.valueOf(entity).getEntityType());
+                spawner.setSpawnedType(EntityType.valueOf(SpawnerTypes.valueOf(entity).getType().toUpperCase()));
 
             }
 
