@@ -39,7 +39,7 @@ public class BlockPlace implements Listener {
                else
                    owner = spawnerFile.getSpawner(e.getBlockAgainst().getLocation()).getDisplayName();
                spawnerInfo.add(0, "Owner: " + owner);
-               spawnerInfo.add(1, "Type: " + SpawnerTypes.findName(creatureSpawner.getCreatureTypeName()));
+               spawnerInfo.add(1, "Type: " + SpawnerTypes.findName(creatureSpawner.getSpawnedType().name()));
                meta.setLore(spawnerInfo);
                star.setItemMeta(meta);
                ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 5);

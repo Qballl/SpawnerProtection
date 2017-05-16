@@ -32,12 +32,12 @@ public class SpawnerManagementGUIClick implements Listener{
             ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
             ItemMeta meta = spawner.getItemMeta();
             ArrayList<String> lore = new ArrayList<>();
-            String mob = creatureSpawner.getCreatureTypeName().toLowerCase();
+            String mob = creatureSpawner.getSpawnedType().name().toLowerCase();
             for(SpawnerTypes type : SpawnerProtection.getAvailableMobs()) {
                 if (type.getType().equalsIgnoreCase(mob))
                     meta.setDisplayName(type.getDisplayName() + " Spawner");
             }
-            lore.add(0,SpawnerTypes.findName(creatureSpawner.getCreatureTypeName()));
+            lore.add(0,SpawnerTypes.findName(mob));
             meta.setLore(lore);
             spawner.setItemMeta(meta);
             e.getWhoClicked().getInventory().addItem(spawner);

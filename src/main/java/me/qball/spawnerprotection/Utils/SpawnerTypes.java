@@ -10,11 +10,12 @@ public enum SpawnerTypes {
     SKELETON("Skeleton", "skeleton"), SPIDER("Spider", "spider"), SQUID("Squid", "squid"),
     SLIME("Slime", "slime"), VILLAGER("Villager", "villager"), WITCH("Witch", "witch"),
     WOLF("Wolf", "wolf"), CAVESPIDER("CaveSpider", "cave_spider"), ZOMBIE("Zombie", "zombie"),
-    ENDERDRAGON("EnderDragon", "enderdragon"), GIANT("Giant", "giant"), SNOWMAN("Snowman", "snowman"),
+    ENDERDRAGON("EnderDragon", "ender_dragon"), GIANT("Giant", "giant"), SNOWMAN("Snowman", "snowman"),
     HORSE("Horse", "entityhorse"), MOOSHROOM("Mooshroom", "mushroom_cow"), OCELOT("Ocelot", "ozelot"),
     PIGMAN("Pigman", "pig_zombie"), MAGMACUBE("Magmacube", "magma_cube"),
     WITHER("Wither", "wither"), IRONGOLEM("IronGolem", "iron_golem"),
-    SHULKER("Shulker", "shulker"), POLARBEAR("PolarBear", "polar_bear"), LLAMA("Llama", "llama");
+    SHULKER("Shulker", "shulker"), POLARBEAR("PolarBear", "polar_bear"),
+    LLAMA("Llama", "llama"), PARROT("Parrot", "parrot");
 
     private String displayName;
     private String type;
@@ -24,12 +25,14 @@ public enum SpawnerTypes {
         this.type = type;
     }
 
-    public String getType(){
+    public String getType() {
         return this.type;
     }
-    public String getDisplayName(){
+
+    public String getDisplayName() {
         return this.displayName;
     }
+
     public static String findName(String creatureName) {
         for (SpawnerTypes type : SpawnerTypes.values()) {
             if (type.getType().equalsIgnoreCase(creatureName))

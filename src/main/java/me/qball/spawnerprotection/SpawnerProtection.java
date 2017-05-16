@@ -62,15 +62,18 @@ public final class SpawnerProtection extends JavaPlugin implements Listener {
         ArrayList<SpawnerTypes> types  = new ArrayList<>();
         String[] tmp = Bukkit.getVersion().split("MC: ");
         if(tmp[1].contains("1.8")){
-            for(int i = 0; i<=SpawnerTypes.values().length-4;i++)
+            for(int i = 0; i<=SpawnerTypes.values().length-5;i++)
                 types.add(SpawnerTypes.values()[i]);
         }else if(tmp[1].contains("1.9")){
-            for(int i = 0; i<=SpawnerTypes.values().length-3;i++)
+            for(int i = 0; i<=SpawnerTypes.values().length-4;i++)
                 types.add(SpawnerTypes.values()[i]);
         }else if(tmp[1].contains("1.10")){
-            for(int i = 0; i<=SpawnerTypes.values().length-2;i++)
+            for(int i = 0; i<=SpawnerTypes.values().length-3;i++)
                 types.add(SpawnerTypes.values()[i]);
         }else if(tmp[1].contains("1.11")){
+            for(int i = 0; i<=SpawnerTypes.values().length-2;i++)
+                types.add(SpawnerTypes.values()[i]);
+        }else if(tmp[1].contains("1.12")){
             for(int i = 0; i<=SpawnerTypes.values().length-1;i++)
                 types.add(SpawnerTypes.values()[i]);
         }
