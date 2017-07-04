@@ -8,7 +8,11 @@ import me.qball.spawnerprotection.Utils.SpawnerTypes;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.CreatureSpawner;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -78,6 +82,21 @@ public final class SpawnerProtection extends JavaPlugin implements Listener {
                 types.add(SpawnerTypes.values()[i]);
         }
       return types.toArray(new SpawnerTypes[types.size()]);
+    }
+
+    public ItemStack makeSpawner(CreatureSpawner creatureSpawner){
+        String mob = SpawnerTypes.findName(creatureSpawner.getSpawnedType().name());
+        ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
+        ItemMeta meta = spawner.getItemMeta();
+        for(SpawnerTypes type : SpawnerProtection.getAvailableMobs()) {
+            if (type.getType().equalsIgnoreCase(mob))
+                meta.setDisplayName(type.getDisplayName() + " Spawner");
+        }
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(0,mob);
+        meta.setLore(lore);
+        spawner.setItemMeta(meta);
+        return spawner;
     }
 
 }

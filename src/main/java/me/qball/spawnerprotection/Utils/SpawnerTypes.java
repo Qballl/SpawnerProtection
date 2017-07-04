@@ -1,7 +1,5 @@
 package me.qball.spawnerprotection.Utils;
 
-import org.bukkit.entity.EntityType;
-
 public enum SpawnerTypes {
     BAT("Bat", "bat"), BLAZE("Blaze", "blaze"), CHICKEN("Chicken", "chicken"), COW("Cow", "cow"),
     CREEPER("Creeper", "creeper"), ENDERMAN("Enderman", "enderman"), ENDERMITE("Endermite", "endermite"),

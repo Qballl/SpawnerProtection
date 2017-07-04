@@ -83,8 +83,8 @@ public class SpawnerFile {
     }
     public boolean lookUpSpawner(Location loc){
         spawners = YamlConfiguration.loadConfiguration(file);
+        String spawnerLocation = SpawnerProtection.convertToString(loc);
         for(String location : spawners.getConfigurationSection("Spawners").getKeys(false)){
-            String spawnerLocation = SpawnerProtection.convertToString(loc);
             if(spawnerLocation.equals(location))
                 return true;
         }

@@ -13,6 +13,8 @@ SpecifySpawner: '&2You must specify a spawner'
 NotAcceptable: '&2Spawner type not acceptable'
 PreventSpawnerExplosion: true
 PreventNaturalSpawnerExplosion: true
+SilkSpawner: false
+SilkNaturalSpawner: false
 Spawner_Costs:
   bat_spawner: 100
   blaze_spawner: 200
