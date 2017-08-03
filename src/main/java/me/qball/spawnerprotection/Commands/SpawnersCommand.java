@@ -52,7 +52,8 @@ public class SpawnersCommand implements CommandExecutor {
                             type = SpawnerTypes.valueOf(spawner.toUpperCase());
                             ItemStack stack = new ItemStack(Material.MOB_SPAWNER);
                             ItemMeta meta = stack.getItemMeta();
-                            meta.setDisplayName(type.getDisplayName() + " Spawner");
+                            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',spawnerProtection.getConfig().getString("SpawnerNameFormat"))+
+                                    type.getDisplayName() + " Spawner");
                             meta.setLore(Collections.singletonList(type.getDisplayName()));
                             stack.setItemMeta(meta);
                             p.getInventory().addItem(stack);
@@ -78,7 +79,8 @@ public class SpawnersCommand implements CommandExecutor {
                                     if (response.transactionSuccess()) {
                                         ItemStack stack = new ItemStack(Material.MOB_SPAWNER);
                                         ItemMeta meta = stack.getItemMeta();
-                                        meta.setDisplayName(type.getDisplayName() + " Spawner");
+                                        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',spawnerProtection.getConfig().getString("SpawnerNameFormat"))+
+                                                type.getDisplayName() + " Spawner");
                                         meta.setLore(Collections.singletonList(type.getDisplayName()));
                                         stack.setItemMeta(meta);
                                         p.getInventory().addItem(stack);
@@ -98,6 +100,11 @@ public class SpawnersCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("gui")) {
                     Gui gui = new Gui(spawnerProtection);
                     gui.createShop(p);
+                }else if (args[0].equalsIgnoreCase("reload")){
+                    if(p.hasPermission("spawnerprotection.protect.reload")) {
+                        spawnerProtection.getServer().getPluginManager().getPlugin("SpawnerProtection").reloadConfig();
+                        p.sendMessage(ChatColor.GREEN+"Config has been reloaded");
+                    }
                 }
             }
         }

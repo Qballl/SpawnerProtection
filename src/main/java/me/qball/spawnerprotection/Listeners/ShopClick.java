@@ -31,7 +31,7 @@ public class ShopClick implements Listener{
             return;
         e.setCancelled(true);
         String entity = e.getCurrentItem().getItemMeta().getDisplayName();
-        SpawnerTypes type = SpawnerTypes.valueOf(entity.toUpperCase());
+        SpawnerTypes type = SpawnerTypes.valueOf(ChatColor.stripColor(entity.toUpperCase()));
         int cost = spawnerProtection.getConfig().getInt("Spawner_Costs." + type.toString().toLowerCase()+"_spawner");
         if(!e.getWhoClicked().hasPermission("spawner.spawnerprotection.spawners.buy."+type.getDisplayName().toLowerCase())||!e.getWhoClicked().hasPermission("spawnerprotection.spawners.buy.*")) {
             e.getWhoClicked().sendMessage(ChatColor.translateAlternateColorCodes('&',noPerm.replaceAll("\\{mob}",type.getDisplayName())));
@@ -43,7 +43,8 @@ public class ShopClick implements Listener{
                     e.getWhoClicked().sendMessage(ChatColor.translateAlternateColorCodes('&',costMsg.replaceAll("\\{cost}",String.valueOf(cost)).replaceAll("\\{mob}",type.getDisplayName())));
                     ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
                     ItemMeta meta = spawner.getItemMeta();
-                    meta.setDisplayName(type.getDisplayName()+ " Spawner");
+                    meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',spawnerProtection.getConfig().getString("SpawnerNameFormat"))+
+                            type.getDisplayName() + " Spawner");
                     meta.setLore(Collections.singletonList(type.getDisplayName()));
                     spawner.setItemMeta(meta);
                     e.getWhoClicked().getInventory().addItem(spawner);

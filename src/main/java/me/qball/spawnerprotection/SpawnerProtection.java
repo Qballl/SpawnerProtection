@@ -7,6 +7,7 @@ import me.qball.spawnerprotection.Utils.SpawnerFile;
 import me.qball.spawnerprotection.Utils.SpawnerTypes;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
@@ -90,7 +91,8 @@ public final class SpawnerProtection extends JavaPlugin implements Listener {
         ItemMeta meta = spawner.getItemMeta();
         for(SpawnerTypes type : SpawnerProtection.getAvailableMobs()) {
             if (type.getType().equalsIgnoreCase(mob))
-                meta.setDisplayName(type.getDisplayName() + " Spawner");
+                meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',getConfig().getString("SpawnerNameFormat"))+
+                        type.getDisplayName() + " Spawner");
         }
         ArrayList<String> lore = new ArrayList<>();
         lore.add(0,mob);

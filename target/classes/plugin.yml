@@ -1,5 +1,5 @@
 name: SpawnerProtection
-version: 1.4
+version: 2.0
 main: me.qball.spawnerprotection.SpawnerProtection
 authors: [Qball]
 description: Protect user placed spawners
@@ -8,6 +8,8 @@ commands:
    spawners:
     description: Base command
 permissions:
+     spawnerprotection.protect.reload:
+        description: Allows someone to reload config
      spawnerprotection.protect.admin:
         description: Admin bypass permsission
      spawnerprotection.spawners.get:

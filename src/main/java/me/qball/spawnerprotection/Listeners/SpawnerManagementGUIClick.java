@@ -3,6 +3,7 @@ package me.qball.spawnerprotection.Listeners;
 import me.qball.spawnerprotection.Utils.SpawnerFile;
 import me.qball.spawnerprotection.SpawnerProtection;
 import me.qball.spawnerprotection.Utils.SpawnerTypes;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.event.EventHandler;
@@ -35,7 +36,8 @@ public class SpawnerManagementGUIClick implements Listener{
             String mob = creatureSpawner.getSpawnedType().name().toLowerCase();
             for(SpawnerTypes type : SpawnerProtection.getAvailableMobs()) {
                 if (type.getType().equalsIgnoreCase(mob))
-                    meta.setDisplayName(type.getDisplayName() + " Spawner");
+                    meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',spawnerProtection.getConfig().getString("SpawnerNameFormat"))+
+                            type.getDisplayName() + " Spawner");
             }
             lore.add(0,SpawnerTypes.findName(mob));
             meta.setLore(lore);

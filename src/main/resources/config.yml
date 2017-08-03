@@ -1,6 +1,8 @@
 #For the cost use {cost} and for spawner mob use {mob}
 #NotYourSpawnerClick is the message sent when a user clicks on a spawner they do not own
 #For NotYourSpawnerClick owner use {owner}
+# SpawnerNameFormat is the what the color codes for a spawner name in inventories should be
+# this will include the buy gui
 CostMsg: '&4${cost} has been removed for purchasing a {mob} spawner'
 NotEnoughMoney: '&2You do not have enough money for that spawner'
 SpawnerChangeMsg: '&2 You may not change the spawner type'
@@ -15,6 +17,7 @@ PreventSpawnerExplosion: true
 PreventNaturalSpawnerExplosion: true
 SilkSpawner: false
 SilkNaturalSpawner: false
+SpawnerNameFormat: '&6&l'
 Spawner_Costs:
   bat_spawner: 100
   blaze_spawner: 200

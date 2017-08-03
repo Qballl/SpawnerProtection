@@ -32,7 +32,7 @@ public class SpawnerBreak implements Listener {
                     }else if(e.getPlayer().getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)||
                             e.getPlayer().getItemInHand().containsEnchantment(Enchantment.SILK_TOUCH)){
                     CreatureSpawner creatureSpawner = (CreatureSpawner)e.getBlock().getState();
-                    e.getPlayer().getInventory().addItem(spawnerProtection.makeSpawner(creatureSpawner));
+                    e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(),spawnerProtection.makeSpawner(creatureSpawner));
                     spawnerFile.removeSpawner(e.getBlock().getLocation());
                 }
             } else {
@@ -41,7 +41,7 @@ public class SpawnerBreak implements Listener {
                     if(e.getPlayer().getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)||
                             e.getPlayer().getItemInHand().containsEnchantment(Enchantment.SILK_TOUCH)){
                         CreatureSpawner creatureSpawner = (CreatureSpawner)e.getBlock().getState();
-                        e.getPlayer().getInventory().addItem(spawnerProtection.makeSpawner(creatureSpawner));
+                        e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(),spawnerProtection.makeSpawner(creatureSpawner));
                     }
                 }else{
                     e.setCancelled(true);

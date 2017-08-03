@@ -8,6 +8,8 @@ commands:
    spawners:
     description: Base command
 permissions:
+     spawnerprotection.protect.reload:
+        description: Allows someone to reload config
      spawnerprotection.protect.admin:
         description: Admin bypass permsission
      spawnerprotection.spawners.get:
