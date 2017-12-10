@@ -5,6 +5,7 @@ import me.qball.spawnerprotection.Utils.Gui;
 import me.qball.spawnerprotection.Utils.SpawnerTypes;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -52,7 +53,7 @@ public class SpawnersCommand implements CommandExecutor {
                             type = SpawnerTypes.valueOf(spawner.toUpperCase());
                             ItemStack stack = new ItemStack(Material.MOB_SPAWNER);
                             ItemMeta meta = stack.getItemMeta();
-                            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',spawnerProtection.getConfig().getString("SpawnerNameFormat"))+
+                            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', spawnerProtection.getConfig().getString("SpawnerNameFormat")) +
                                     type.getDisplayName() + " Spawner");
                             meta.setLore(Collections.singletonList(type.getDisplayName()));
                             stack.setItemMeta(meta);
@@ -79,7 +80,7 @@ public class SpawnersCommand implements CommandExecutor {
                                     if (response.transactionSuccess()) {
                                         ItemStack stack = new ItemStack(Material.MOB_SPAWNER);
                                         ItemMeta meta = stack.getItemMeta();
-                                        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',spawnerProtection.getConfig().getString("SpawnerNameFormat"))+
+                                        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', spawnerProtection.getConfig().getString("SpawnerNameFormat")) +
                                                 type.getDisplayName() + " Spawner");
                                         meta.setLore(Collections.singletonList(type.getDisplayName()));
                                         stack.setItemMeta(meta);
@@ -100,10 +101,33 @@ public class SpawnersCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("gui")) {
                     Gui gui = new Gui(spawnerProtection);
                     gui.createShop(p);
-                }else if (args[0].equalsIgnoreCase("reload")){
-                    if(p.hasPermission("spawnerprotection.protect.reload")) {
+                } else if (args[0].equalsIgnoreCase("reload")) {
+                    if (p.hasPermission("spawnerprotection.protect.reload")) {
                         spawnerProtection.getServer().getPluginManager().getPlugin("SpawnerProtection").reloadConfig();
-                        p.sendMessage(ChatColor.GREEN+"Config has been reloaded");
+                        p.sendMessage(ChatColor.GREEN + "Config has been reloaded");
+                    }
+                }
+            }
+        } else {
+            if(args.length>=3){
+                if(args[0].equalsIgnoreCase("give")){
+                    if(Bukkit.getServer().getPlayer(args[1]) != null){
+                        Player p = Bukkit.getServer().getPlayer(args[1]);
+                        SpawnerTypes type;
+                        try {
+                            type = SpawnerTypes.valueOf(args[2].toUpperCase());
+                            ItemStack stack = new ItemStack(Material.MOB_SPAWNER);
+                            ItemMeta meta = stack.getItemMeta();
+                            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', spawnerProtection.getConfig().getString("SpawnerNameFormat")) +
+                                    type.getDisplayName() + " Spawner");
+                            meta.setLore(Collections.singletonList(type.getDisplayName()));
+                            stack.setItemMeta(meta);
+                            p.getInventory().addItem(stack);
+                            p.sendMessage(ChatColor.GREEN + "Added " + type.getDisplayName() + " spawner to your inventory");
+                        } catch (IllegalArgumentException e) {
+                            sender.sendMessage(spawnerProtection.getConfig().getString("NotAcceptable"));
+                        }
+
                     }
                 }
             }

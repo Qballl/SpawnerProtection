@@ -34,7 +34,8 @@ public class SpawnerClick implements Listener {
         SpawnerFile spawnerFile = new SpawnerFile(spawnerProtection);
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock().getState() instanceof CreatureSpawner) {
             if (e.getItem() != null  ) {
-                if(e.getItem().getType().equals(Material.MONSTER_EGG) || e.getItem().getType().equals(Material.MONSTER_EGGS)) {
+                if(e.getItem().getType().equals(Material.MONSTER_EGG) || e.getItem().getType().equals(Material.MONSTER_EGGS)||
+                        e.getItem().getType().name().contains("spawn")) {
                     e.setCancelled(true);
                     e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', spawnerProtection.getConfig().getString("SpawnerChangeMsg")));
                 }
