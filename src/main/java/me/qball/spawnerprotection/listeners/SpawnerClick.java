@@ -1,10 +1,10 @@
-package me.qball.spawnerprotection.Listeners;
+package me.qball.spawnerprotection.listeners;
 
-import me.qball.spawnerprotection.Utils.SpawnerFile;
 import me.qball.spawnerprotection.SpawnerProtection;
-import me.qball.spawnerprotection.Utils.SpawnerTypes;
+import me.qball.spawnerprotection.utils.SpawnerFile;
+import me.qball.spawnerprotection.utils.SpawnerType;
+import me.qball.spawnerprotection.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.event.EventHandler;
@@ -19,28 +19,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-
 public class SpawnerClick implements Listener {
+    public static final HashMap<UUID, CreatureSpawner> spawner = new HashMap<>();
     private final SpawnerProtection spawnerProtection;
 
     public SpawnerClick(SpawnerProtection spawnerProtection) {
         this.spawnerProtection = spawnerProtection;
     }
 
-    public static final  HashMap<UUID, CreatureSpawner> spawner = new HashMap<>();
-
     @EventHandler
     public void onSpawnerClick(PlayerInteractEvent e) {
         SpawnerFile spawnerFile = new SpawnerFile(spawnerProtection);
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock().getState() instanceof CreatureSpawner) {
-            if (e.getItem() != null  ) {
-                if(e.getItem().getType().equals(Material.MONSTER_EGG) || e.getItem().getType().equals(Material.MONSTER_EGGS)||
+            if (e.getItem() != null) {
+                if (e.getItem().getType().equals(Material.MONSTER_EGG) || e.getItem().getType().equals(Material.MONSTER_EGGS) ||
                         e.getItem().getType().name().contains("spawn")) {
                     e.setCancelled(true);
-                    e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', spawnerProtection.getConfig().getString("SpawnerChangeMsg")));
+                    e.getPlayer().sendMessage(Utils.toColor(spawnerProtection.getConfig().getString("SpawnerChangeMsg")));
                 }
-            }
-            else if (spawnerFile.getSpawner(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation()) || e.getPlayer().hasPermission("spawnerprotection.protect.admin")) {
+            } else if (spawnerFile.getSpawner(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation()) || e.getPlayer().hasPermission("spawnerprotection.protect.admin")) {
                 e.setCancelled(true);
                 CreatureSpawner creatureSpawner = (CreatureSpawner) e.getClickedBlock().getState();
                 spawner.put(e.getPlayer().getUniqueId(), (CreatureSpawner) e.getClickedBlock().getState());
@@ -50,12 +47,12 @@ public class SpawnerClick implements Listener {
                 meta.setDisplayName("Spawner Info");
                 ArrayList<String> spawnerInfo = new ArrayList<>();
                 String owner = "";
-                if(!spawnerFile.lookUpSpawner(creatureSpawner.getLocation()))
+                if (!spawnerFile.lookUpSpawner(creatureSpawner.getLocation()))
                     owner = "No Owner";
                 else
                     owner = spawnerFile.getSpawner(e.getClickedBlock().getLocation()).getDisplayName();
                 spawnerInfo.add(0, "Owner: " + owner);
-                spawnerInfo.add(1, "Type: " + SpawnerTypes.findName(creatureSpawner.getSpawnedType().name()));
+                spawnerInfo.add(1, "Type: " + SpawnerType.findName(creatureSpawner.getSpawnedType().name()));
                 meta.setLore(spawnerInfo);
                 star.setItemMeta(meta);
                 ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 5);
@@ -70,14 +67,13 @@ public class SpawnerClick implements Listener {
                 spawnerMan.setItem(2, glass);
                 spawnerMan.setItem(8, redGlass);
                 e.getPlayer().openInventory(spawnerMan);
-            }
-            else{
+            } else {
                 String notYourClick = spawnerProtection.getConfig().getString("NotYourSpawnerClick");
-                if(!spawnerFile.lookUpSpawner((e.getClickedBlock().getState().getLocation())))
-                    e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&',spawnerProtection.getConfig().getString("NoOwnerClick")));
-                else{
-                    notYourClick = notYourClick.replaceAll("\\{owner}",spawnerFile.getSpawner(e.getClickedBlock().getLocation()).getDisplayName());
-                    e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&',notYourClick));
+                if (!spawnerFile.lookUpSpawner((e.getClickedBlock().getState().getLocation())))
+                    e.getPlayer().sendMessage(Utils.toColor(spawnerProtection.getConfig().getString("NoOwnerClick")));
+                else {
+                    notYourClick = notYourClick.replaceAll("\\{owner}", spawnerFile.getSpawner(e.getClickedBlock().getLocation()).getDisplayName());
+                    e.getPlayer().sendMessage(Utils.toColor(notYourClick));
                 }
             }
         }
