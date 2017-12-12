@@ -27,7 +27,7 @@ public class ShopClick implements Listener{
     public void onClick(InventoryClickEvent e){
         String noPerm = spawnerProtection.getConfig().getString("NoPermission");
         String costMsg = spawnerProtection.getConfig().getString("CostMsg");
-        if(e.getClickedInventory() == null  || !e.getClickedInventory().getName().equalsIgnoreCase("Spawner Shop"))
+        if(e.getInventory() == null  || !e.getInventory().getName().equalsIgnoreCase("Spawner Shop"))
             return;
         e.setCancelled(true);
         String entity = e.getCurrentItem().getItemMeta().getDisplayName();

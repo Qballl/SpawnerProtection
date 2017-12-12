@@ -73,7 +73,7 @@ public class SpawnersCommand implements CommandExecutor {
                         SpawnerTypes type = null;
                         try {
                             type = SpawnerTypes.valueOf(spawner.toUpperCase());
-                            if (p.hasPermission("spawnerprotections.spawners.buy." + type.name().toLowerCase()) || p.hasPermission("spawnerprotections.spawners.buy.*")) {
+                            if (p.hasPermission("spawnerprotection.spawners.buy." + type.name().toLowerCase()) || p.hasPermission("spawnerprotection.spawners.buy.*")) {
                                 int cost = spawnerProtection.getConfig().getInt("Spawner_Costs." + type.toString().toLowerCase() + "_spawner");
                                 if (SpawnerProtection.getEcon().getBalance(p) >= cost) {
                                     EconomyResponse response = SpawnerProtection.getEcon().withdrawPlayer(p, cost);

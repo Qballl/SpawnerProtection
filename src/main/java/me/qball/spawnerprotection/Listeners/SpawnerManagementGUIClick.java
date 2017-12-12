@@ -21,9 +21,9 @@ public class SpawnerManagementGUIClick implements Listener{
     }
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getClickedInventory() ==null || !e.getClickedInventory().getName().equals("Spawner Management"))
+        if(e.getInventory() ==null || !e.getInventory().getName().equals("Spawner Management"))
             return;
-        if(e.getClickedInventory() == null)
+        if(e.getInventory() == null)
             return;
         if(!e.getCurrentItem().hasItemMeta())
             return;
