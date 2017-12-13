@@ -26,6 +26,7 @@ public class SpawnerPlace implements Listener {
             SpawnerFile spawnerFile = plugin.getSpawnerFile();
             spawnerFile.saveSpawner(event.getPlayer().getUniqueId(), event.getBlock().getLocation());
             spawner.setSpawnedType(EntityType.valueOf(SpawnerType.valueOf(entity).getType().toUpperCase()));
+            spawner.update();
         }
     }
 
