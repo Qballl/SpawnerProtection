@@ -3,16 +3,17 @@
 #For NotYourSpawnerClick owner use {owner}
 # SpawnerNameFormat is the what the color codes for a spawner name in inventories should be
 # this will include the buy gui
-CostMsg: '&4${cost} has been removed for purchasing a {mob} spawner'
-NotEnoughMoney: '&2You do not have enough money for that spawner'
-SpawnerChangeMsg: '&2 You may not change the spawner type'
-NoPermission: '&2You may not purchase a {mob} spawner'
-NotYourSpawnerClick: '&2This spawner is not yours it belongs to {owner}'
-NoOwnerClick: 'This spawner does not belong to you or anyone'
-NotYourSpawner: '&2This is not your spawner so you may not break it'
-UseGui: '&2Please use the GUI to pickup your spawner to open the gui right click on the spawner'
-SpecifySpawner: '&2You must specify a spawner'
-NotAcceptable: '&2Spawner type not acceptable'
+CostMsg: '&4${cost} has been removed for purchasing a {mob} spawner.'
+NotEnoughMoney: '&cYou do not have enough money for that spawner.'
+NotEnoughSpace: '&cYou do not have enough inventory space for that spawner.'
+SpawnerChangeMsg: '&cYou may not change the spawner type'
+NoPermission: '&cYou may not purchase a {mob} spawner'
+NotYourSpawnerClick: '&cThis spawner is not yours it belongs to &f{owner}&c.'
+NoOwnerClick: '&cThis spawner does not belong to you or anyone.'
+NotYourSpawner: '&cThis is not your spawner so you may not break it.'
+UseGui: '&aPlease use the GUI to pickup your spawner to open the gui right click on the spawner.'
+SpecifySpawner: '&cYou must specify a spawner.'
+NotAcceptable: '&cSpawner type not acceptable.'
 PreventSpawnerExplosion: true
 PreventNaturalSpawnerExplosion: true
 SilkSpawner: false
