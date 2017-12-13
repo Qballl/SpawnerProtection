@@ -1,8 +1,7 @@
-package me.qball.spawnerprotection.Listeners;
-
+package me.qball.spawnerprotection.listeners;
 
 import me.qball.spawnerprotection.SpawnerProtection;
-import me.qball.spawnerprotection.Utils.SpawnerFile;
+import me.qball.spawnerprotection.utils.SpawnerFile;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.event.EventHandler;
@@ -13,9 +12,11 @@ import java.util.Iterator;
 
 public class SpawnerExplode implements Listener {
     private SpawnerProtection spawnerProtection;
-    public SpawnerExplode(SpawnerProtection spawnerProtection){
+
+    public SpawnerExplode(SpawnerProtection spawnerProtection) {
         this.spawnerProtection = spawnerProtection;
     }
+
     @EventHandler
     public void onExplosion(EntityExplodeEvent e) {
         Iterator<Block> iterator = e.blockList().iterator();
@@ -23,12 +24,11 @@ public class SpawnerExplode implements Listener {
         while (iterator.hasNext()) {
             Block block = iterator.next();
             if (block.getState() instanceof CreatureSpawner && spawnerProtection.getConfig().getBoolean("PreventSpawnerExplosion")) {
-               if(!spawnerProtection.getConfig().getBoolean("PreventNaturalSpawnerExplosion")){
-                   if(spawnerFile.lookUpSpawner(block.getLocation()))
-                       iterator.remove();
-               }
-               else
-                iterator.remove();
+                if (!spawnerProtection.getConfig().getBoolean("PreventNaturalSpawnerExplosion")) {
+                    if (spawnerFile.lookUpSpawner(block.getLocation()))
+                        iterator.remove();
+                } else
+                    iterator.remove();
             }
         }
     }
