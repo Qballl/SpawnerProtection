@@ -3,6 +3,7 @@ package me.qball.spawnerprotection.listeners;
 import me.qball.spawnerprotection.SpawnerProtection;
 import me.qball.spawnerprotection.utils.SpawnerFile;
 import me.qball.spawnerprotection.utils.SpawnerType;
+import me.qball.spawnerprotection.utils.Version;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
@@ -43,17 +44,33 @@ public class BlockPlace implements Listener {
                 spawnerInfo.add(1, "Type: " + SpawnerType.findName(creatureSpawner.getSpawnedType().name()));
                 meta.setLore(spawnerInfo);
                 star.setItemMeta(meta);
-                ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 5);
-                ItemMeta greenGlass = glass.getItemMeta();
-                greenGlass.setDisplayName("Pickup spawner");
-                glass.setItemMeta(greenGlass);
-                ItemStack redGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 14);
-                ItemMeta redGlassMeta = redGlass.getItemMeta();
-                redGlassMeta.setDisplayName("Cancel");
-                redGlass.setItemMeta(redGlassMeta);
-                spawnerMan.setItem(0, star);
-                spawnerMan.setItem(2, glass);
-                spawnerMan.setItem(8, redGlass);
+                String[] tmp = Bukkit.getVersion().split("MC: ");
+                Version version = Version.getVersion(tmp[1]);
+                if(!version.getId().equalsIgnoreCase("1.13")) {
+                    ItemStack glass = new ItemStack(Material.valueOf("STAINED_GLASS_PANE"), 1, (byte) 5);
+                    ItemMeta greenGlass = glass.getItemMeta();
+                    greenGlass.setDisplayName("Pickup spawner");
+                    glass.setItemMeta(greenGlass);
+                    ItemStack redGlass = new ItemStack(Material.valueOf("STAINED_GLASS_PANE"), 1, (byte) 14);
+                    ItemMeta redGlassMeta = redGlass.getItemMeta();
+                    redGlassMeta.setDisplayName("Cancel");
+                    redGlass.setItemMeta(redGlassMeta);
+                    spawnerMan.setItem(0, star);
+                    spawnerMan.setItem(2, glass);
+                    spawnerMan.setItem(8, redGlass);
+                }else{
+                    ItemStack glass = new ItemStack(Material.valueOf("GREEN_STAINED_GLASS_PANE"), 1, (byte) 5);
+                    ItemMeta greenGlass = glass.getItemMeta();
+                    greenGlass.setDisplayName("Pickup spawner");
+                    glass.setItemMeta(greenGlass);
+                    ItemStack redGlass = new ItemStack(Material.valueOf("RED_STAINED_GLASS_PANE"), 1, (byte) 14);
+                    ItemMeta redGlassMeta = redGlass.getItemMeta();
+                    redGlassMeta.setDisplayName("Cancel");
+                    redGlass.setItemMeta(redGlassMeta);
+                    spawnerMan.setItem(0, star);
+                    spawnerMan.setItem(2, glass);
+                    spawnerMan.setItem(8, redGlass);
+                }
                 e.getPlayer().openInventory(spawnerMan);
                 e.setCancelled(true);
             }

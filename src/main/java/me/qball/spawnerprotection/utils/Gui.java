@@ -36,7 +36,14 @@ public class Gui {
     }
 
     private ItemStack createStack(String name, List<String> lore) {
-        ItemStack stack = new ItemStack(Material.MOB_SPAWNER);
+        String spawner = "";
+        String[] tmp = Bukkit.getVersion().split("MC: ");
+        Version version = Version.getVersion(tmp[1]);
+        if(version.getId().equalsIgnoreCase("1.13"))
+            spawner = "SPAWNER";
+        else
+           spawner = "MOB_SPAWNER";
+        ItemStack stack = new ItemStack(Material.valueOf(spawner));
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(Utils.toColor(plugin.getConfig().getString("SpawnerNameFormat")) + name);
         meta.setLore(lore);

@@ -45,7 +45,8 @@ public class SpawnerFile {
 
     public void saveFile() {
         try {
-            if (spawners == null) spawners = YamlConfiguration.loadConfiguration(file);
+            if (spawners == null)
+                spawners = YamlConfiguration.loadConfiguration(file);
             spawners.save(file);
         } catch (IOException e) {
             e.printStackTrace();

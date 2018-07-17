@@ -3,8 +3,10 @@ package me.qball.spawnerprotection.listeners;
 import me.qball.spawnerprotection.SpawnerProtection;
 import me.qball.spawnerprotection.utils.SpawnerType;
 import me.qball.spawnerprotection.utils.Utils;
+import me.qball.spawnerprotection.utils.Version;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -42,7 +44,14 @@ public class ShopClick implements Listener {
                 EconomyResponse r = econ.withdrawPlayer((Player) e.getWhoClicked(), cost);
                 if (r.transactionSuccess()) {
                     e.getWhoClicked().sendMessage(Utils.toColor(costMsg.replaceAll("\\{cost}", String.valueOf(cost)).replaceAll("\\{mob}", type.getDisplayName())));
-                    ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
+                    String mobSpawner = "";
+                    String[] tmp = Bukkit.getVersion().split("MC: ");
+                    Version version = Version.getVersion(tmp[1]);
+                    if(version.getId().equalsIgnoreCase("1.13"))
+                        mobSpawner = "SPAWNER";
+                    else
+                        mobSpawner = "MOB_SPAWNER";
+                    ItemStack spawner = new ItemStack(Material.valueOf(mobSpawner));
                     ItemMeta meta = spawner.getItemMeta();
                     meta.setDisplayName(Utils.toColor(spawnerProtection.getConfig().getString("SpawnerNameFormat")) +
                             type.getDisplayName() + " Spawner");

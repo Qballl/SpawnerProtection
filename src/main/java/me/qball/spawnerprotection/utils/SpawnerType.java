@@ -1,6 +1,7 @@
 package me.qball.spawnerprotection.utils;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,7 +46,8 @@ public enum SpawnerType {
     LLAMA("Llama", Version.V1_11), // 1.11
     PARROT("Parrot", Version.V1_12); // 1.12
 
-    private final String displayName, type;
+    private final String displayName;
+    private final String type;
     private final Version version;
 
     SpawnerType(String displayName, Version version) {
@@ -63,8 +65,13 @@ public enum SpawnerType {
 
     public static Set<SpawnerType> getByVersion(Version version) {
         Stream<Version> versions = Version.getVersions(version).stream();
-        return Arrays.stream(values()).filter(spawnerType -> versions.anyMatch(ver -> spawnerType.version == ver))
-                .collect(Collectors.toSet());
+        Set<SpawnerType> set = new HashSet<>();
+        for (SpawnerType spawnerType : values()) {
+            if (versions.anyMatch(ver -> spawnerType.version == ver)) {
+                set.add(spawnerType);
+            }
+        }
+        return set;
     }
 
     public String getDisplayName() {

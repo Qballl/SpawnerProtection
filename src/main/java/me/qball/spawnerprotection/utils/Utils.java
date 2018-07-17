@@ -36,7 +36,14 @@ public final class Utils {
     }
 
     public static ItemStack makeSpawner(String mob) {
-        ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
+        String mobSpawner = "";
+        String[] tmp = Bukkit.getVersion().split("MC: ");
+        Version version = Version.getVersion(tmp[1]);
+        if(version.getId().equalsIgnoreCase("1.13"))
+            mobSpawner = "SPAWNER";
+        else
+            mobSpawner = "MOB_SPAWNER";
+        ItemStack spawner = new ItemStack(Material.valueOf(mobSpawner));
         ItemMeta meta = spawner.getItemMeta();
 
         Arrays.stream(Utils.getAvailableMobs()).filter(type -> Objects.equals(type.getType(), mob))

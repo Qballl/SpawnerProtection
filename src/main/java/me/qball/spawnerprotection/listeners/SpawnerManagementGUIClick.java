@@ -4,6 +4,8 @@ import me.qball.spawnerprotection.SpawnerProtection;
 import me.qball.spawnerprotection.utils.SpawnerFile;
 import me.qball.spawnerprotection.utils.SpawnerType;
 import me.qball.spawnerprotection.utils.Utils;
+import me.qball.spawnerprotection.utils.Version;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.event.EventHandler;
@@ -32,7 +34,14 @@ public class SpawnerManagementGUIClick implements Listener {
         if (e.getCurrentItem().getItemMeta().getDisplayName().equals("Pickup spawner")) {
             e.setCancelled(true);
             CreatureSpawner creatureSpawner = SpawnerClick.spawner.get(e.getWhoClicked().getUniqueId());
-            ItemStack spawner = new ItemStack(Material.MOB_SPAWNER);
+            String mobSpawner = "";
+            String[] tmp = Bukkit.getVersion().split("MC: ");
+            Version version = Version.getVersion(tmp[1]);
+            if(version.getId().equalsIgnoreCase("1.13"))
+                mobSpawner = "SPAWNER";
+            else
+                mobSpawner = "MOB_SPAWNER";
+            ItemStack spawner = new ItemStack(Material.valueOf(mobSpawner));
             ItemMeta meta = spawner.getItemMeta();
             ArrayList<String> lore = new ArrayList<>();
             String mob = creatureSpawner.getSpawnedType().name().toLowerCase();
