@@ -10,10 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public final class Utils {
 
@@ -38,10 +35,11 @@ public final class Utils {
     public static ItemStack makeSpawner(String mob) {
         String mobSpawner = "";
         String[] tmp = Bukkit.getVersion().split("MC: ");
-        Version version = Version.getVersion(tmp[1]);
-        if(version.getId().equalsIgnoreCase("1.13"))
+        int ver = Integer.parseInt(tmp[tmp.length - 1].substring(0, 4).split("\\.")[1]);
+        if(ver>=13) {
+            System.out.println("We are using 1.13");
             mobSpawner = "SPAWNER";
-        else
+        }else
             mobSpawner = "MOB_SPAWNER";
         ItemStack spawner = new ItemStack(Material.valueOf(mobSpawner));
         ItemMeta meta = spawner.getItemMeta();

@@ -38,8 +38,8 @@ public class Gui {
     private ItemStack createStack(String name, List<String> lore) {
         String spawner = "";
         String[] tmp = Bukkit.getVersion().split("MC: ");
-        Version version = Version.getVersion(tmp[1]);
-        if(version.getId().equalsIgnoreCase("1.13"))
+        int ver = Integer.parseInt(tmp[tmp.length - 1].substring(0, 4).split("\\.")[1]);
+        if(ver>=13)
             spawner = "SPAWNER";
         else
            spawner = "MOB_SPAWNER";

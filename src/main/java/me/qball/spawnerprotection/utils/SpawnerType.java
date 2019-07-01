@@ -1,9 +1,8 @@
 package me.qball.spawnerprotection.utils;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import org.bukkit.Bukkit;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -44,7 +43,17 @@ public enum SpawnerType {
     SHULKER("Shulker", Version.V1_9), // 1.9
     POLAR_BEAR("PolarBear", Version.V1_10), // 1.10
     LLAMA("Llama", Version.V1_11), // 1.11
-    PARROT("Parrot", Version.V1_12); // 1.12
+    VEX("Vex", Version.V1_11),
+    EVOKER("Evoker", Version.V1_11),
+    VINDICATOR("Vindicator", Version.V1_11),
+    PARROT("Parrot", Version.V1_12),// 1.12
+    TURTLE("Turtle", Version.V1_13),
+    FOX("Fox",Version.V1_14),
+    PANDA("Panda",Version.V1_14),
+    RAVAGER("Ravager",Version.V1_14),
+    PILLAGER("Pillager",Version.V1_14);
+
+
 
     private final String displayName;
     private final String type;
@@ -59,19 +68,39 @@ public enum SpawnerType {
     public static String findName(String creatureName) {
         return Arrays.stream(values())
                 .filter(spawnerType -> Objects.equals(spawnerType.getType(), creatureName))
-                .map(SpawnerType::getDisplayName)
+                .map(SpawnerType::getType)
                 .findAny().orElse("");
     }
 
     public static Set<SpawnerType> getByVersion(Version version) {
-        Stream<Version> versions = Version.getVersions(version).stream();
         Set<SpawnerType> set = new HashSet<>();
         for (SpawnerType spawnerType : values()) {
-            if (versions.anyMatch(ver -> spawnerType.version == ver)) {
+            if (Version.getVersions(version).stream().anyMatch(ver -> spawnerType.version == ver)) {
                 set.add(spawnerType);
             }
         }
-        return set;
+        return sort(set);
+    }
+
+    private static Set<SpawnerType> sort(Set<SpawnerType> unsorted){
+        List<String> types = new ArrayList<>();
+        for(SpawnerType type : unsorted){
+            types.add(type.getType());
+        }
+        Collections.sort(types);
+        Set<SpawnerType> sorted = new TreeSet<>();
+        for(String type : types){
+            sorted.add(SpawnerType.valueOf(type.toUpperCase()));
+        }
+        return sorted;
+    }
+
+    public static ArrayList<SpawnerType> getSpawnersByVersion(Version version){
+        String[] tmp = Bukkit.getBukkitVersion().split("MC: ");
+        Version ver = Version.getVersion(tmp[1]);
+        ArrayList<SpawnerType> types = new ArrayList<>();
+        for(SpawnerType type : SpawnerType.values());
+        return new ArrayList<>();
     }
 
     public String getDisplayName() {

@@ -30,7 +30,7 @@ public class ShopClick implements Listener {
     public void onClick(InventoryClickEvent e) {
         String noPerm = spawnerProtection.getConfig().getString("NoPermission");
         String costMsg = spawnerProtection.getConfig().getString("CostMsg");
-        if (e.getInventory() == null || !e.getInventory().getName().equalsIgnoreCase("Spawner Shop"))
+        if (e.getInventory() == null || !e.getView().getTitle().equalsIgnoreCase("Spawner Shop"))
             return;
         e.setCancelled(true);
         String entity = e.getCurrentItem().getItemMeta().getDisplayName();
@@ -46,8 +46,8 @@ public class ShopClick implements Listener {
                     e.getWhoClicked().sendMessage(Utils.toColor(costMsg.replaceAll("\\{cost}", String.valueOf(cost)).replaceAll("\\{mob}", type.getDisplayName())));
                     String mobSpawner = "";
                     String[] tmp = Bukkit.getVersion().split("MC: ");
-                    Version version = Version.getVersion(tmp[1]);
-                    if(version.getId().equalsIgnoreCase("1.13"))
+                    int ver = Integer.parseInt(tmp[tmp.length - 1].substring(0, 4).split("\\.")[1]);
+                    if(ver>=13)
                         mobSpawner = "SPAWNER";
                     else
                         mobSpawner = "MOB_SPAWNER";
@@ -55,7 +55,7 @@ public class ShopClick implements Listener {
                     ItemMeta meta = spawner.getItemMeta();
                     meta.setDisplayName(Utils.toColor(spawnerProtection.getConfig().getString("SpawnerNameFormat")) +
                             type.getDisplayName() + " Spawner");
-                    meta.setLore(Collections.singletonList(type.getDisplayName()));
+                    meta.setLore(Collections.singletonList(type.getType()));
                     spawner.setItemMeta(meta);
                     e.getWhoClicked().getInventory().addItem(spawner);
                     e.getWhoClicked().closeInventory();
