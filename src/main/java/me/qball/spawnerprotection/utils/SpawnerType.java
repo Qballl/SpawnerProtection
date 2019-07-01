@@ -51,7 +51,8 @@ public enum SpawnerType {
     FOX("Fox",Version.V1_14),
     PANDA("Panda",Version.V1_14),
     RAVAGER("Ravager",Version.V1_14),
-    PILLAGER("Pillager",Version.V1_14);
+    PILLAGER("Pillager",Version.V1_14),
+    CAT("Cat",Version.V1_14);
 
 
 
