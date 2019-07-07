@@ -68,9 +68,9 @@ public enum SpawnerType {
 
     public static String findName(String creatureName) {
         return Arrays.stream(values())
-                .filter(spawnerType -> Objects.equals(spawnerType.getType(), creatureName))
+                .filter(spawnerType -> spawnerType.name().equalsIgnoreCase(creatureName))
                 .map(SpawnerType::getType)
-                .findAny().orElse("");
+                .findAny().orElse(null);
     }
 
     public static Set<SpawnerType> getByVersion(Version version) {
