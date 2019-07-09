@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -28,6 +29,8 @@ public class ShopClick implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {
+        if(e.getCurrentItem() == null || e.getSlotType() == InventoryType.SlotType.OUTSIDE)
+            return;
         String noPerm = spawnerProtection.getConfig().getString("NoPermission");
         String costMsg = spawnerProtection.getConfig().getString("CostMsg");
         if (e.getInventory() == null || !e.getView().getTitle().equalsIgnoreCase("Spawner Shop"))

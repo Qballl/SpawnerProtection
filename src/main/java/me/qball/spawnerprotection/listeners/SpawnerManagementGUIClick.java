@@ -11,6 +11,7 @@ import org.bukkit.block.CreatureSpawner;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -25,6 +26,8 @@ public class SpawnerManagementGUIClick implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {
+        if(e.getCurrentItem() == null || e.getSlotType() == InventoryType.SlotType.OUTSIDE)
+            return;
         if (e.getInventory() == null || !e.getView().getTitle().equals("Spawner Management"))
             return;
         if (e.getInventory() == null)
