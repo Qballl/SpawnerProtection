@@ -15,6 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * This could probably still be alot better, but at least now it is readable... somewhat.
@@ -35,7 +37,7 @@ public class SpawnersCommand implements CommandExecutor {
         String costMsg = plugin.getConfig().getString("CostMsg");
 
         if (args.length == 0) {
-            Utils.sendMsg(sender, "&cUsage: /spawners <get|buy|list|gui> <spawner>.\n&cFor a list of spawners use /spawners info.");
+            Utils.sendMsg(sender, "&cUsage: /spawner <get|buy|list|shop> <spawner>.\n&cFor a list of spawners use /spawners info.");
             return true;
         }
 
@@ -113,7 +115,7 @@ public class SpawnersCommand implements CommandExecutor {
         }
 
         // /spawners gui
-        if (sender instanceof Player && args[0].equalsIgnoreCase("gui")) {
+        if (sender instanceof Player && args[0].equalsIgnoreCase("shop")) {
             Player player = (Player) sender;
             Gui gui = new Gui(plugin);
             gui.createShop(player);

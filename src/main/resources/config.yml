@@ -64,3 +64,9 @@ Spawner_Costs:
   panda_spawner: 3000
   ravager_spawner: 2500
   pillager_spawner: 3000
+  cat_spawner: 2000
+  bee_spawner: 3000
+  hoglin_spawner: 10000
+  piglin_spawner: 90000
+  zoglin_spawner: 15000
+  strider_spawner: 10000

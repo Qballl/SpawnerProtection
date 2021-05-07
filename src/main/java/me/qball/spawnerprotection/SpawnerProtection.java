@@ -6,9 +6,11 @@ import me.qball.spawnerprotection.listeners.*;
 import me.qball.spawnerprotection.utils.SpawnerFile;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public final class SpawnerProtection extends JavaPlugin {
@@ -34,8 +36,8 @@ public final class SpawnerProtection extends JavaPlugin {
         getConfig().options().copyDefaults(true);
         saveConfig();
 
-        getCommand("spawners").setExecutor(new SpawnersCommand(this));
-        getCommand("spawners").setTabCompleter(new SpawnerTab(this));
+        getCommand("spawner").setExecutor(new SpawnersCommand(this));
+        getCommand("spawner").setTabCompleter(new SpawnerTab(this));
 
         spawnerFile = new SpawnerFile(this);
         spawnerFile.createFile();

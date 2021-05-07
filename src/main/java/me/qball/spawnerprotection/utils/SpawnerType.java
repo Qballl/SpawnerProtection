@@ -52,7 +52,12 @@ public enum SpawnerType {
     PANDA("Panda",Version.V1_14),
     RAVAGER("Ravager",Version.V1_14),
     PILLAGER("Pillager",Version.V1_14),
-    CAT("Cat",Version.V1_14);
+    CAT("Cat",Version.V1_14),
+    BEE("Bee",Version.V1_15),
+    HOGLIN("Hoglin",Version.V1_16),
+    PIGLIN("Piglin",Version.V1_16),
+    ZOGLIN("Zoglin",Version.V1_16),
+    STRIDER("Strider",Version.V1_16);
 
 
 

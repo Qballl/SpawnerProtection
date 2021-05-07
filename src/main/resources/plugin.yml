@@ -6,7 +6,7 @@ description: Protect user placed spawners
 Depend: [Vault]
 api-version: 1.13
 commands:
-   spawners:
+   spawner:
     description: Base command
 permissions:
      spawnerprotection.protect.reload:

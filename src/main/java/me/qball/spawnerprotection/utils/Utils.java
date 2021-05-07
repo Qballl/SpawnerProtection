@@ -37,7 +37,6 @@ public final class Utils {
         String[] tmp = Bukkit.getVersion().split("MC: ");
         int ver = Integer.parseInt(tmp[tmp.length - 1].substring(0, 4).split("\\.")[1]);
         if(ver>=13) {
-            System.out.println("We are using 1.13");
             mobSpawner = "SPAWNER";
         }else
             mobSpawner = "MOB_SPAWNER";
